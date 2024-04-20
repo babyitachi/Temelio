@@ -1,6 +1,8 @@
 package com.example.temeliobe.repositories;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+
 import org.springframework.stereotype.Repository;
 import com.example.temeliobe.entities.NonProfit;
 
@@ -19,5 +21,10 @@ public class NonProfitRepo {
 
     public NonProfit getNonProfit(String email) {
         return this.nonProfit.get(email);
-    }    
+    } 
+    
+    public Set<String> getAllNonProfit() {
+        Set<String> keys = this.nonProfit.keySet();
+        return keys;
+    }   
 }

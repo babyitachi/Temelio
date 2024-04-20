@@ -7,8 +7,10 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 
 import com.example.temeliobe.entities.Email;
+import com.example.temeliobe.entities.Foundation;
 import com.example.temeliobe.entities.NonProfit;
 import com.example.temeliobe.repositories.EmailRepo;
+import com.example.temeliobe.repositories.FoundationRepo;
 import com.example.temeliobe.repositories.NonProfitRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -19,9 +21,14 @@ public class EmailService {
 
     private final EmailRepo emailRepo;
     private final NonProfitRepo nonProfitRepo;
+    private final FoundationRepo foundationRepo;
 
-    public void addEmails(String senderEmailId, List<String> nonProfitEmailIds) {
+    public boolean addEmails(String senderEmailId, List<String> nonProfitEmailIds) {
+        if (this.foundationRepo.getFoundation(senderEmailId) == null) {
+            return false;
+        }
         this.emailRepo.addEmails(senderEmailId, nonProfitEmailIds);
+        return true;
     }
 
     public List<String> getEmails(String nonProfitEmailId) {
