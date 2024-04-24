@@ -12,5 +12,7 @@ import lombok.Setter;
 @Setter
 public class EmailDto {
     private String senderEmailId;
+    private String senderEmailCCId;
+    private String senderEmailBCCId;
     private List<String> nonProfitEmailIds;
 }

@@ -35,7 +35,7 @@ public class EmailController {
 
     @PostMapping("/send")
     public ResponseEntity<String> sendEmails(@RequestBody EmailDto emailBody) {
-        Boolean sentStatus = this.emailService.addEmails(emailBody.getSenderEmailId(), emailBody.getNonProfitEmailIds());
+        Boolean sentStatus = this.emailService.addEmails(emailBody.getSenderEmailId(), emailBody.getSenderEmailCCId(), emailBody.getSenderEmailBCCId(), emailBody.getNonProfitEmailIds());
         if(sentStatus){
             return ResponseEntity.status(HttpStatus.OK).build();
         }

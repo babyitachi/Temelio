@@ -23,11 +23,12 @@ public class EmailService {
     private final NonProfitRepo nonProfitRepo;
     private final FoundationRepo foundationRepo;
 
-    public boolean addEmails(String senderEmailId, List<String> nonProfitEmailIds) {
+    public boolean addEmails(String senderEmailId, String senderEmailCCId, String senderEmailBCCId,
+            List<String> nonProfitEmailIds) {
         if (this.foundationRepo.getFoundation(senderEmailId) == null) {
             return false;
         }
-        this.emailRepo.addEmails(senderEmailId, nonProfitEmailIds);
+        this.emailRepo.addEmails(senderEmailId, senderEmailCCId, senderEmailBCCId, nonProfitEmailIds);
         return true;
     }
 
@@ -43,8 +44,9 @@ public class EmailService {
 
         }
         emails.forEach(email -> {
-            String text = "Sending money to nonprofit " + nonProfit.getName() + " at address " + nonProfit.getAddress()+" - by " + email.getSender();
-            messages.add(text);
+            String text = "Sending money to nonprofit " + nonProfit.getName() + " at address " + nonProfit.getAddress()
+                    + " - by " + email.getSender() + " " + email.getSenderCC() + " " + email.getSenderBCC();
+            messages.add(text.trim());
         });
         return messages;
     }

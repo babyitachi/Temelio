@@ -13,4 +13,6 @@ import lombok.Setter;
 @Entity
 public class Email {
     private String sender;// foundation
+    private String senderCC;// foundation
+    private String senderBCC;// foundation
 }

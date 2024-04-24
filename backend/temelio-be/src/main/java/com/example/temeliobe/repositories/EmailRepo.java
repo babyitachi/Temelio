@@ -18,8 +18,9 @@ import lombok.RequiredArgsConstructor;
 public class EmailRepo {
     private final NonProfitRepo nonProfitRepo;
 
-    public void addEmails(String senderEmailId, List<String> nonProfitEmailIds) {
-        Email senderEmail = new Email(senderEmailId);
+    public void addEmails(String senderEmailId, String senderEmailCCId, String senderEmailBCCId,
+            List<String> nonProfitEmailIds) {
+        Email senderEmail = new Email(senderEmailId, senderEmailCCId, senderEmailBCCId);
         nonProfitEmailIds.forEach(nonProfitEmailId -> {
             NonProfit npo = this.nonProfitRepo.getNonProfit(nonProfitEmailId);
             if (npo != null) {
